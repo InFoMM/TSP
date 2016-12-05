@@ -1,30 +1,45 @@
 function [p,d,t] = twoopt(M)
-% Author: Clint Wong.
+% Author:
+%     Clint Wong, December 2016.
+% Description:
+%     Initialise with route 1, 2, ..., 10, 1.
+%     Replace 2 edges at random and accept the new route if it is shorter.
+%     Terminate when the current distance is not lowered for 1000
+%     consecutive trials. 
+% Input:
+%     M: Matrix, distance matrix between cities.
+% Output:
+%     p: Array, row vector of permutation of the order of cities to visit.
+%     d: Float, total distance travelled in a round trip.
+%     t: Float, execution time for algorithm.
+
 tic
-% requires M to be symmetric with 0 along its diagonals
 [N,~]=size(M);
+
+% flow matrix, with D(i,j)=indicator(i to j)
 D=zeros(N,N);
 
-%initialise, route from 1 to N
+% initialise, route from 1 to N
 D=diag(ones(1,N-1),1);
 D(N,1)=1;
 
 dold=sum(M(D>0));
 
-% p(i) is the destination of i
+% define p(i) is the destination of i
 [p,~]=find(D'>0);
+% number of trials
+iter=0;
 
-while dold>2999
-    
+while iter<1000
     % permute 2 edges
     id=randperm(N,2);
     a=id(1);b=id(2);
     % new path length        
     dnew=dold-M(a,p(a))-M(b,p(b))+M(a,b)+M(p(a),p(b));
-    
     if dnew < dold
         % take new path
         dold=dnew;
+        iter=0;
     % update flow matrix
         % replace 2 edges
         D(a,b)=1;
@@ -51,10 +66,14 @@ while dold>2999
             end
         end
     else
+        iter=iter+1;
     end
 end
+
+% amend p-output 
 P = [1:10; p']';
 p = get_permutation(P);
+
 d=dold;
 t=toc;
 
