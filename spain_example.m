@@ -1,8 +1,11 @@
 function [c, M] = spain_example()
-% Author: Oliver Sheridan-Methven, December 2016.
-% Produces a matrix M which represents the distance information for the
-% travelling salesman problem.
-% Input: None.
+% Author: 
+%     Oliver Sheridan-Methven, December 2016.
+% Description:
+%     Produces a matrix M which represents the distance information for the
+%     travelling salesman problem.
+% Input: 
+%     None.
 % Output:
 %     c: String Array, spanish cities.
 %     M: Matrix, distances between spanish cities indexed according to c,

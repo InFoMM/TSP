@@ -9,3 +9,7 @@ Group:
 Description:
 
 	Suite of matlab functions to solve the travelling salesman problem.
+
+Function signatures:
+
+	For an example function signature, see increasing loop.m.
