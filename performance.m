@@ -11,7 +11,7 @@
 [c, M] = spain_example();
 disp(sprintf('\n\nPerformance of:\n\t\tincreasing loop algorithm'))
 [p, d, t] = increasing_loop(M);
-disp(sprintf('Time taken:\n\t%g', t))
+disp(sprintf('Time taken:\n\t%s', t))
 disp(sprintf('Total distance:\n\t%g', d))
 disp(sprintf('Path taken:\n\t[%d, %d, %d, %d, %d, %d, %d, %d, %d, %d]', p))
 
