@@ -1,5 +1,5 @@
 function [p,d,t] = twoopt(M)
-
+% Author: Clint Wong.
 tic
 % requires M to be symmetric with 0 along its diagonals
 [N,~]=size(M);
@@ -20,7 +20,7 @@ while dold>2999
     id=randperm(N,2);
     a=id(1);b=id(2);
     % new path length        
-    dnew=dold-M(a,p(a))-M(b,p(b))+M(a,b)+M(p(a),p(b))
+    dnew=dold-M(a,p(a))-M(b,p(b))+M(a,b)+M(p(a),p(b));
     
     if dnew < dold
         % take new path
@@ -53,7 +53,8 @@ while dold>2999
     else
     end
 end
-
+P = [1:10; p']';
+p = get_permutation(P);
 d=dold;
 t=toc;
 
