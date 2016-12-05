@@ -36,7 +36,7 @@ disp(sprintf('Total distance:\n\t%g', d))
 disp(sprintf('Path taken:\n\t[%d, %d, %d, %d, %d, %d, %d, %d, %d, %d]', p))
 disp(sprintf('Route taken:\n\t[%s, %s, %s, %s, %s, %s, %s, %s, %s, %s]', c(p)))
 
-disp(sprintf('\n\nPerformance of:\n\t\t2-Opt Algorithm.'))
+disp(sprintf('\n\nPerformance of:\n\t\t2-Opt algorithm.'))
 [p, d, t] = twoopt(M);
 disp(sprintf('Time taken:\n\t%s', t))
 disp(sprintf('Total distance:\n\t%g', d))
