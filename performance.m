@@ -22,14 +22,14 @@
 
 [c, M] = spain_example();
 
-disp(sprintf('\n\nPerformance of:\n\t\tincreasing loop algorithm'))
+disp(sprintf('\n\nPerformance of:\n\t\tIncreasing loop algorithm'))
 [p, d, t] = increasing_loop(M);
 disp(sprintf('Time taken:\n\t%s', t))
 disp(sprintf('Total distance:\n\t%g', d))
 disp(sprintf('Path taken:\n\t[%d, %d, %d, %d, %d, %d, %d, %d, %d, %d]', p))
 disp(sprintf('Route taken:\n\t[%s, %s, %s, %s, %s, %s, %s, %s, %s, %s]', c(p)))
 
-disp(sprintf('\n\nPerformance of:\n\t\tforcefully increasing loop algorithm'))
+disp(sprintf('\n\nPerformance of:\n\t\tForcefully increasing loop algorithm'))
 [p, d, t] = forcefully_increasing_loop(M);
 disp(sprintf('Time taken:\n\t%s', t))
 disp(sprintf('Total distance:\n\t%g', d))
