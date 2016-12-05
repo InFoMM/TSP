@@ -12,4 +12,8 @@ Description:
 
 Function signatures:
 
-	For an example function signature, see increasing loop.m.
+	For an example function signature, see increasing_loop.m.
+
+Performance descriptions:
+
+	To see how various algorithms perform see performance.m.
