@@ -93,52 +93,52 @@ lb = zeros( m, 1 );
 ub = ones( m, 1 );
 
 %% Solve problem
-x = intlinprog(f,1:m,[],[],Aeq,beq,lb,ub);
-printCycle( x, m, cityNames );
+[ x, cost ] = intlinprog(f,1:m,[],[],Aeq,beq,lb,ub);
+cycles = printCycle( x(1:m), cityNames(1:n) );
 
 
 
 
 
 
-%% 
-% Now, If we want to include the additional constraint:
-% - Only one cycle
-% This translates into (see Wikipedia) ui-uj+nxij <= n-1
-
-% We need to introduce n more variables u
-% First we re-arrange the previous matrices:
-
-% expand cost functional
-f = [ f; zeros( n, 1 ) ];
-m = size( f, 1 );
-
-% u can be in [-Inf, +Inf]
-lb = [ lb; -Inf*ones(n,1)];
-ub = [ ub;  Inf*ones(n,1)];
-
-% u is not involved in the equality contraints
-Aeq = [ Aeq, zeros( n ) ];
-
-% Now the interesting bit
-A = n * eye( m-n );
-temp = zeros( m-n, n );
-for i=1:n-1
-	cont = [0,n-1:-1:1];
-	temp(1+sum(cont(1:i)):sum(cont(1:i+1)),i) = ones( sum(cont(1:i+1)) - sum(cont(1:i)), 1 );
-	temp(1+sum(cont(1:i)):sum(cont(1:i+1)),i+1:end) = -eye( sum(cont(1:i+1)) - sum(cont(1:i)) );
-end
-%A = [ A, -temp ];
-A = [ A, temp;...
-			A,-temp ];
-b = (n-1) * ones( 2*(m-n), 1 );
-
-
-
-
-%% Solve problem
-x = intlinprog(f,1:m,A,b,Aeq,beq,lb,ub);
-printCycle( x, m, cityNames );
+% %% 
+% % Now, If we want to include the additional constraint:
+% % - Only one cycle
+% % This translates into (see Wikipedia) ui-uj+nxij <= n-1
+% 
+% % We need to introduce n more variables u
+% % First we re-arrange the previous matrices:
+% 
+% % expand cost functional
+% f = [ f; zeros( n, 1 ) ];
+% m = size( f, 1 );
+% 
+% % u can be in [-Inf, +Inf]
+% lb = [ lb; -Inf*ones(n,1)];
+% ub = [ ub;  Inf*ones(n,1)];
+% 
+% % u is not involved in the equality contraints
+% Aeq = [ Aeq, zeros( n ) ];
+% 
+% % Now the interesting bit
+% A = n * eye( m-n );
+% temp = zeros( m-n, n );
+% for i=1:n-1
+% 	cont = [0,n-1:-1:1];
+% 	temp(1+sum(cont(1:i)):sum(cont(1:i+1)),i) = ones( sum(cont(1:i+1)) - sum(cont(1:i)), 1 );
+% 	temp(1+sum(cont(1:i)):sum(cont(1:i+1)),i+1:end) = -eye( sum(cont(1:i+1)) - sum(cont(1:i)) );
+% end
+% %A = [ A, temp ];
+% A = [ A, temp;...
+% 			A,-temp ];
+% b = (n-1) * ones( 2*(m-n), 1 );
+% 
+% 
+% 
+% 
+% %% Solve problem
+% x = intlinprog(f,1:m,A,b,Aeq,beq,lb,ub);
+% printCycle( x(1:m), cityNames(1:n) );
 
 
 
