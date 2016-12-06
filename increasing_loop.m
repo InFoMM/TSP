@@ -17,8 +17,6 @@ elseif ~issymmetric(M)
     error('Input a symmetric distance matrix.')
 end
 tic
-d = realmax;
-d = 0.0; % the total distance.
 U = zeros(1, size(M, 1)); % Indices in graph.
 V = 1:length(U); % Initialising V, the complement of U;
 P = [V; U]'; % We store the path P as a matrix:
