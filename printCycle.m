@@ -1,10 +1,26 @@
-function [] = printCycle( x, m, cityNames )
+function [ cycles ] = printCycle( x, cityNames )
+% Fancy printing of the cycles in the solution of the TSP
+%
+% INPUT:
+% -x: solution of the TSP as provided by LPTSP.m. Basically a (weirdly 
+%			indexed) vector of edges.
+% -cityNames: well, the names of the cities. In order.
+%
+% OUTPUT:
+% -It prints the cities in each cycle, in the order they're visited
+% -cycles: cell containing all the cycles found in the algorithm. Each
+%					 element of the cell is a vector of indices of the cities in the
+%					 cycle.
+%
+% Author:
+%     Federico Danieli, December 2016.
 
-%% Fancy printing of the cycle
-% Here follows the ugliest code ever written. And this is all to have a
-% nice output of the solution
 
+% Here follows the ugliest code ever written. It's convoluted and it's
+% messed up, so, really, don't look at it. Just trust it.
 n = size( cityNames, 2 );
+m = size( x, 1 );
+cycles = {};
 
 % First, let's transform the ugly vector of edges in a proper graph matrix:
 idx = find( x(1:m) > 0 ); % find nonzero elements identifying edges
@@ -42,6 +58,8 @@ while i <= n
 		end
 		output = [ output, char( cityNames( path(1) ) ) ];
 		disp( output )
+		%store the newly found cycle
+		cycles{size(cycles,1)+1} = [ path, path(1) ];
 		% eventually, you'll need to restart the path from another node
 		for ii = 2:n
 			% pick the smallest that has not been visited yet

@@ -94,7 +94,7 @@ ub = ones( m, 1 );
 
 %% Solve problem
 x = intlinprog(f,1:m,[],[],Aeq,beq,lb,ub);
-printCycle( x, m, cityNames );
+cycles = printCycle( x(1:m), cityNames(1:n) );
 
 
 
@@ -138,7 +138,7 @@ b = (n-1) * ones( 2*(m-n), 1 );
 
 %% Solve problem
 x = intlinprog(f,1:m,A,b,Aeq,beq,lb,ub);
-printCycle( x, m, cityNames );
+printCycle( x(1:m), cityNames(1:n) );
 
 
 
