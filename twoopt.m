@@ -4,7 +4,7 @@ function [p,d,t] = twoopt(M)
 % Description:
 %     Initialise with route 1, 2, ..., 10, 1.
 %     Replace 2 edges at random and accept the new route if it is shorter.
-%     Terminate when the current distance is not lowered for 1000
+%     Terminate when the current distance is not lowered by tol for 1000
 %     consecutive trials. 
 % Input:
 %     M: Matrix, distance matrix between cities.
@@ -29,6 +29,7 @@ dold=sum(M(D>0));
 [p,~]=find(D'>0);
 % number of trials
 iter=0;
+tol=1e-4;
 
 while iter<1000
     % permute 2 edges
@@ -36,7 +37,7 @@ while iter<1000
     a=id(1);b=id(2);
     % new path length        
     dnew=dold-M(a,p(a))-M(b,p(b))+M(a,b)+M(p(a),p(b));
-    if dnew < dold
+    if tol < (dold-dnew)/dold 
         % take new path
         dold=dnew;
         iter=0;
