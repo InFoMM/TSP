@@ -26,3 +26,11 @@ algo_stats(M, @increasing_loop, 'Increasing loop algorithm.')
 algo_stats(M, @forcefully_increasing_loop, 'Forcefully increasing loop algorithm.')
 algo_stats(M, @twoopt, '2-Opt algorithm.')
 
+% Shows the performance on a random matrix.
+for m=[3, 10, 50, 100, 500]
+M = make_rand_dist(m, 1);
+algo_stats(M, @increasing_loop, 'Increasing loop algorithm.')
+algo_stats(M, @forcefully_increasing_loop, 'Forcefully increasing loop algorithm.')
+algo_stats(M, @twoopt, '2-Opt algorithm.')
+end
+
