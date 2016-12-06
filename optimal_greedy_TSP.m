@@ -1,4 +1,4 @@
-function [minimal_cost, best_path, time] = optimal_greedy_TSP(A)
+function [best_path, minimal_cost, time] = optimal_greedy_TSP(A)
 % Author: Joseph Field 
 % Date:   December 2016.
 %
@@ -38,7 +38,7 @@ for i = 1:N
     end
 end
 
-best_path = best_path(1:end-1)';
+best_path = best_path';
 time = toc;
 
 %%

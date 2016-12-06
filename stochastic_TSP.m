@@ -1,4 +1,4 @@
-function [path_array, cost, time] = stochastic_TSP(A, n)
+function [path_array, cost, time] = stochastic_TSP(A)
 % Author: Joseph Field
 % Date:   December 2016.
 %
@@ -8,8 +8,6 @@ function [path_array, cost, time] = stochastic_TSP(A, n)
 %     path which is shorter than the following 'n' paths.
 % Input: 
 %     A: Any chosen distance matrix.
-%     n: Number of 'wins' that a path must have before being chosen as the
-%     'shortest'.
 % Output:
 %     path_array: Optimal path, given numerically.
 %     cost: Total cost for for the chosen solution.
@@ -24,6 +22,11 @@ A_original  = A;
 % Check the size of the problem
 [~,N] = size(A);
 
+% Set the size of the 'winning' streak needed to accept the shortest path,
+% such that it scales with the size of the matrix.
+n = N^4;
+% n = 5*N^4 works well for N = 10.
+
 % Counter of unbeaten record
 winner_count = 0;
 
@@ -37,7 +40,7 @@ cost = 0;
 for j = 1:N-1
     cost = cost + A(ptc(j),ptc(j+1));
 end
-cost = cost + A(ptc(end),ptc(1))
+cost = cost + A(ptc(end),ptc(1));
 
 % Start the timer after the initialisations
 tic;
