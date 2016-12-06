@@ -72,10 +72,6 @@ while iter<1000
 end
 P = [1:length(p); p']';
 % amend p-output 
-<<<<<<< HEAD
-P = [1:N; p']';
-=======
->>>>>>> 44a912f31aee5454b803882e670ba8248e55e941
 p = get_permutation(P);
 
 d=dold;
