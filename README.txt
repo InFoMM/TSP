@@ -2,6 +2,14 @@ Author:
 
 	Oliver Sheridan-Methven, December 2016.
 
+Colaborators:
+
+    Clint Wong.
+    Jonathan Peters.
+    Federico Danieli.
+    Ana Osojnik.
+    Joseph Field.
+
 Group: 
 
 	InFoMM, cohort 3.
