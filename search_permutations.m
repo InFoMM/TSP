@@ -1,10 +1,12 @@
 function [ p, d, t ] = search_permutations( M )
-%search_permutations algorithm performs an exhaustive search by checks all possible permutations of paths
 % Author:
 %     Ana Osojnik, December 2016.
 % Description:
 %     Checks all possible permutations of cities to find the shortest path.
 %     First city to visit is fixed to be 1.
+% Warning:
+%     Uses huge amounts of memory, prone to causing memory crashes when
+%     using beyond 10 cities. 
 % Input:
 %     M: Matrix, distance matrix between cities.
 % Output:
