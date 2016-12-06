@@ -4,11 +4,11 @@ Author:
 
 Colaborators:
 
-    Clint Wong.
-    Jonathan Peters.
-    Federico Danieli.
-    Ana Osojnik.
-    Joseph Field.
+	Clint Wong.
+	Jonathan Peters.
+	Federico Danieli.
+	Ana Osojnik.
+	Joseph Field.
 
 Group: 
 
