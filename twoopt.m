@@ -53,7 +53,7 @@ while dold>2999
     else
     end
 end
-P = [1:10; p']';
+P = [1:length(p); p']';
 p = get_permutation(P);
 d=dold;
 t=toc;
