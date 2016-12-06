@@ -4,7 +4,7 @@ function [ cycles ] = printCycle( x, cityNames )
 % INPUT:
 % -x: solution of the TSP as provided by LPTSP.m. Basically a (weirdly 
 %			indexed) vector of edges.
-% -cityNames: well, the names of the cities. In order.
+% -cityNames: a cell containing the names of the cities. In order.
 %
 % OUTPUT:
 % -It prints the cities in each cycle, in the order they're visited
