@@ -19,6 +19,7 @@ function [P] = p_matrix(X)
 %              1     2
 %              2     3
 %              3     1
+
 P = [(1:size(X, 1))', zeros(size(X, 1), 1)];
 for i=P(:, 1)'
     l = X(i, :);
