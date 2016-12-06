@@ -1,4 +1,4 @@
-%%
+function [path_array,cost, time] = greedy_algorithm_TSP(A)
 % Author: Joseph Field 
 % Date:   December 2016.
 %
@@ -13,26 +13,8 @@
 % Output:
 %     path_array: Optimal path, using this algorithm.
 %     cost: Total cost for for the chosen solution.
-
-%% 
-% The adjacency matrix for the Spain Assignment is below.
-%
-% A = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-%      515, 0, 0, 0, 0, 0, 0, 0, 0, 0
-%      353, 868, 0, 0, 0, 0, 0, 0, 0, 0
-%      422, 621, 434, 0, 0, 0, 0, 0, 0, 0
-%      482, 997, 129, 544, 0, 0, 0, 0, 0, 0
-%      673, 437, 841, 407, 951, 0, 0, 0, 0, 0
-%      634, 778, 631, 212, 756, 440, 0, 0, 0, 0
-%      815, 693, 827, 393, 937, 267, 363, 0, 0, 0
-%      609, 1046, 256, 538, 219, 945, 474, 837, 0, 0
-%      166, 349, 519, 352, 648, 501, 564, 673, 697, 0];
-%  
-%  A = A + A';
-
-%%
-function [path_array,cost] = greedy_algorithm_TSP(A)
-
+%     time: Float, time taken for function execution.
+tic
 % Holder matrix to find the end connecting cost
 A_original  = A;
 
@@ -79,3 +61,26 @@ end
 
 path_array;
 cost = cost + A_original(path_array(end),path_array(end-1));
+path_array = path_array(1:end-1)';
+time = toc;
+%%
+
+
+%% 
+% The adjacency matrix for the Spain Assignment is below.
+%
+% A = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+%      515, 0, 0, 0, 0, 0, 0, 0, 0, 0
+%      353, 868, 0, 0, 0, 0, 0, 0, 0, 0
+%      422, 621, 434, 0, 0, 0, 0, 0, 0, 0
+%      482, 997, 129, 544, 0, 0, 0, 0, 0, 0
+%      673, 437, 841, 407, 951, 0, 0, 0, 0, 0
+%      634, 778, 631, 212, 756, 440, 0, 0, 0, 0
+%      815, 693, 827, 393, 937, 267, 363, 0, 0, 0
+%      609, 1046, 256, 538, 219, 945, 474, 837, 0, 0
+%      166, 349, 519, 352, 648, 501, 564, 673, 697, 0];
+%  
+%  A = A + A';
+
+%%
+end
