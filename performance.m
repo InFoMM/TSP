@@ -23,12 +23,13 @@
 [c, M] = spain_example();
 
 algo_stats(M, @increasing_loop, 'Increasing loop algorithm.')
-algo_stats(M, @forcefully_increasing_loop, 'Forcefully increasing loop algorithm.')
-algo_stats(M, @twoopt, '2-Opt algorithm.')
-algo_stats(M, @greedy_algorithm_TSP, 'Greedy algorithm.')
-algo_stats(M, @optimal_greedy_TSP, 'Greedy algorithm minimiser.')
-algo_stats(M, @stochastic_TSP, 'Basic stochastic checker.')
-algo_stats(M, @search_permutations, 'Permutation searcher.')
+% algo_stats(M, @forcefully_increasing_loop, 'Forcefully increasing loop algorithm.')
+% algo_stats(M, @twoopt, '2-Opt algorithm.')
+% algo_stats(M, @greedy_algorithm_TSP, 'Greedy algorithm.')
+% algo_stats(M, @optimal_greedy_TSP, 'Greedy algorithm minimiser.')
+% algo_stats(M, @stochastic_TSP, 'Basic stochastic checker.')
+% algo_stats(M, @search_permutations, 'Permutation searcher.')
+algo_stats(M, @tsp_ip_no_cut_set_oliver, 'Integer solution allowing loops.')
 
 
 
