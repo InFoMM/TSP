@@ -14,7 +14,9 @@ function [path_array,cost, time] = greedy_algorithm_TSP(A)
 %     path_array: Optimal path, using this algorithm.
 %     cost: Total cost for for the chosen solution.
 %     time: Float, time taken for function execution.
-tic
+
+%%
+tic;
 % Holder matrix to find the end connecting cost
 A_original  = A;
 
@@ -63,8 +65,6 @@ path_array;
 cost = cost + A_original(path_array(end),path_array(end-1));
 path_array = path_array(1:end-1)';
 time = toc;
-%%
-
 
 %% 
 % The adjacency matrix for the Spain Assignment is below.

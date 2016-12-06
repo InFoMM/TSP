@@ -1,4 +1,4 @@
-%%
+function [path_array, cost] = greedy_algorithm_TSP_all(A,point)
 % Author: Joseph Field 
 % Date:   December 2016.
 %
@@ -14,8 +14,6 @@
 %     cost: Total cost for for the chosen solution.
 
 %%
-function [path_array,cost] = greedy_algorithm_TSP_all(A,point)
-
 % Holder matrix to find the end connecting cost
 A_original  = A;
 
@@ -63,4 +61,6 @@ end
 
 path_array;
 cost = cost + A_original(path_array(end),path_array(end-1));
+path_array = path_array(1:end-1)';
 
+end
