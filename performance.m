@@ -28,6 +28,8 @@ algo_stats(M, @twoopt, '2-Opt algorithm.')
 algo_stats(M, @greedy_algorithm_TSP, 'Greedy algorithm.')
 algo_stats(M, @optimal_greedy_TSP, 'Greedy algorithm minimiser.')
 algo_stats(M, @stochastic_TSP, 'Basic stochastic checker.')
+algo_stats(M, @search_permutations, 'Permutation searcher.')
+
 
 
 % Shows the performance on a random matrix.
@@ -39,5 +41,6 @@ M = make_rand_dist(m, 1);
 %algo_stats(M, @greedy_algorithm_TSP, 'Greedy algorithm.')
 %algo_stats(M, @optimal_greedy_TSP, 'Greedy algorithm minimiser')
 %algo_stats(M, @stochastic_TSP, 'Basic stochastic checker.')
+% algo_stats(M, @search_permutations, 'Permutation searcher.')
 end
 
