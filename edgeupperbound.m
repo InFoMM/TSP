@@ -1,11 +1,11 @@
-function [UBcost, time,route] = edgeupperbound(y_init)
+function [route, UBcost, time] = edgeupperbound(y_init)
 %%Author: Mel Beckerleg
 %Description: TSP algorithm that generates an upper bound on cost by adding the cheapest
 %available edge that doesn't create a loop or a fork.
 %Input: an nxn matrix representing distances between cities
 %Output: an upper bound on the cost, computation time, a route.
-y=y_init;
-n=length(y);
+n=length(y_init);
+y=y_init +sum(sum(y_init))*eye(n);
 t_edge=zeros(n);
 t_cost=zeros(1,n);
 hold=zeros(2,n); %store the vertices of each edge)
@@ -52,9 +52,9 @@ for j=1:n %find the exposed vertices which only have one edge coming out of them
         end_edge(j)=j;
     end
 end
-p=[find(end_edge)];
-hold(:,n)=p'; %make an edge between the exposed vertices
-t_cost(n)=y_init(p(1),p(2));
+missing=[find(end_edge)];
+hold(:,n)=missing'; %make an edge between the exposed vertices
+t_cost(n)=y_init(missing(1),missing(2));
 UBcost=sum(t_cost);
 time=toc;
 cities=zeros(1,n+1);
