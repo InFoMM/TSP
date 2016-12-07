@@ -11,7 +11,7 @@ function [d] = compute_final_d(M, P)
 %     d: Float, round trip distance. 
 
 p = P(all(P, 2), :);
-l = size(p, 1);
+l = length(p);
 d = 0.0;
 for j=1:l
     q = p(j, 2);
