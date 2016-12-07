@@ -1,0 +1,72 @@
+\usepackage{amsmath} % Nice maths symbols.
+\usepackage{amssymb} % Nice variable symbols.
+\usepackage{array} % Allow for custom column widths in tables.
+\usepackage{arydshln} % Dashed lines using \hdashline \cdashline
+\usepackage{bbm} % Gives Blackboard fonts.
+\usepackage{bm} % Bold math symbols.
+\usepackage[margin=10pt,font=small,labelfont=bf,labelsep=endash]{caption} % Caption figures and tables nicely.
+\usepackage{enumitem} % Nice listing options in itemize and enumerate.
+\usepackage{esdiff} % Gives nice differential operators.
+\usepackage{esvect} % Gives nice vector arrows.
+\usepackage{float} % Nice figure placement.
+\usepackage{geometry} % Use nice margins.
+\usepackage{graphicx} % Include figures.
+\usepackage[colorlinks=true,linkcolor=blue,urlcolor=blue,citecolor=blue,anchorcolor=blue]{hyperref} % Colour links.
+\usepackage{indentfirst} % Indents the first paragraph.
+\usepackage{letltxmacro} % For defining a nice SQRT symbol.
+\usepackage[framed,numbered,autolinebreaks,useliterate]{mcode} % Inports Listings package ideal for MATLAB.
+\usepackage{multirow} % Nice table cells spanning many rows.
+\usepackage{multicol} % If I want to use multiple columns.
+\usepackage[numbers, sort&compress]{natbib} % Nice references.
+\usepackage{physics} % Nice partial derivatives and BRAKET notation.
+
+
+% Present the references in the order they are used.
+\bibliographystyle{unsrtnat}
+
+% Listing -> Code in environment labels.
+\renewcommand{\lstlistingname}{Code}
+
+% Nice paragraph indents.
+\setlength{\parindent}{15mm}
+
+% Giving the refereneces the right title. 
+\renewcommand{\bibname}{References} 
+
+% Gives nice margins.
+\geometry{left=20mm, right=20mm, top=20mm, bottom=20mm}
+
+% Removes hyphenation
+\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=10000
+\hbadness=10000
+
+% To change the spacing in lists
+%\setlist{noitemsep} % or \setlist{noitemsep} to leave space around whole list
+\setenumerate{itemsep=-0.4em,topsep=0.5em} % Seems to look nice.
+
+% Custom column widths using C{2cm}, L, R, etc.
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+% Gives a nice column separation in multicolumn mode.
+\setlength{\columnsep}{5mm}
+
+% Figure environment for use in multicolumn. To put in captions use \captionof{figure}{content of caption}.
+\newenvironment{Figure}
+{\par\medskip\noindent\minipage{\linewidth}}
+{\endminipage\par\medskip}
+
+% Gives the nice SQRT symbol.
+\makeatletter
+\let\oldr@@t\r@@t
+\def\r@@t#1#2{%
+	\setbox0=\hbox{$\oldr@@t#1{#2\,}$}\dimen0=\ht0
+	\advance\dimen0-0.2\ht0
+	\setbox2=\hbox{\vrule height\ht0 depth -\dimen0}%
+	{\box0\lower0.4pt\box2}}
+\LetLtxMacro{\oldsqrt}{\sqrt}
+\renewcommand*{\sqrt}[2][\ ]{\oldsqrt[#1]{#2}}
+\makeatother
