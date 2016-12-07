@@ -1,0 +1,97 @@
+\section{Instructions}
+\label{sec:intructions}
+
+
+\subsection{Getting started}
+\label{subsec:getting_started}
+
+\subsubsection{Pulling from GitHub}
+\label{subsubsec:pulling_from_github}
+
+The code for this suite can be found at 
+\begin{center}
+\href{https://github.com/InFoMM/TSP}{https://github.com/InFoMM/TSP}
+\end{center}
+which should be cloned/forked into whichever directory the user wants to call the functions from.
+
+\subsubsection{Git branches}
+\label{subsubsec:git_branches}
+
+To see which branches are available type \\
+\indent
+\verb|$ git branch| \\
+into the console. To switch to one of these branches, type \\
+\indent
+\verb|$ git checkout <available branch name>|. \\
+This is because many of the authors have to present this work, and so ensures submitted work is separate from the \texttt{master} branch.
+
+\subsection{Directory structure}
+\label{subsec:directory_structure}
+
+Once the directory has been cloned it should have the following directory structure:
+\\
+\noindent
+\begin{minipage}{\linewidth}
+\begin{verbatim}
+    TSP/
+        matlab/
+            increasing_loop.m
+            performance.m
+            etc ...
+        user_guide/
+            figures/
+            latex/
+                guide.pdf
+                etc ...
+\end{verbatim}
+\end{minipage}
+\\
+\noindent
+
+\subsubsection{Working paths}
+\label{subsubsec:working_paths}
+
+To use the functions in \texttt{TSP/matlab} change the Matlab current working directory into this folder. \textbf{Do not add this folder or sub-folders to the working path!} This is because many of these functions use relative path location descriptions to find supporting functions. 
+
+\subsection{Dependencies}
+\label{subsec:dependencies}
+
+Unfortunately not all the dependencies are known, but on MATLABR2016b these likely include:
+\begin{itemize}
+	\item Optimisation Toolbox.
+	\item Statistics and Machine Learning.
+\end{itemize}
+If any others are found please let us know via GitHub.
+
+
+\subsection{Testing it works}
+\label{subsec:testing_it_works}
+
+The directory \texttt{Matlab/} contains the file \verb|test.m| which when run should output the following: \\
+\noindent
+\begin{verbatim}
+Performance of:
+        Purmuation searching algorithm.
+Time taken:
+    2.686500e-01
+Total distance:
+    2999
+Paths taken:
+    [1, 1, 10, 3, 2, 5, 6, 9, 8, 7]
+Paths taken:
+    [4, 4, 7, 8, 9, 6, 5, 2, 3, 10]
+Routes taken:
+    [Alicante, Alicante, Valencia, Granada, Barcelona, ...
+     Malaga, Pamplona, Sevilla, Santander, Salamanca]
+Routes taken:
+    [Madrid, Madrid, Salamanca, Santander, Sevilla, ...
+    Pamplona, Malaga, Barcelona, Granada, Valencia]
+\end{verbatim}
+where the time taken to complete may be different to the quoted value. 
+
+\subsubsection{Trying various algorithms}
+\label{subsubsec:trying_various_algorithms}
+
+To see the performance of some different algorithms see \verb|performance.m|, where we have presented some example code to demonstrate some performance characteristics of various algorithms.
+
+\clearpage

@@ -9,11 +9,11 @@ function [] = algo_stats(M, f, t)
 %     t: String, name of algorithm.
 % Output:
 %     None.
-disp(sprintf('\n\nPerformance of:\n\t\t%s', t))
-[p, d, t] = f(M);
+disp(sprintf('\n\nPerformance of:\n\t\tPurmuations searching algorithm.'))
+[p, d, t] = search_permutations(M);
 disp(sprintf('Time taken:\n\t%s', t))
 disp(sprintf('Total distance:\n\t%g', d))
-% disp(sprintf('Path taken:\n\t[%d, %d, %d, %d, %d, %d, %d, %d, %d, %d]', p))
-% disp(sprintf('Route taken:\n\t[%s, %s, %s, %s, %s, %s, %s, %s, %s, %s]', c(p)))
+disp(sprintf('Path taken:\n\t[%d, %d, %d, %d, %d, %d, %d, %d, %d, %d]', p))
+disp(sprintf('Route taken:\n\t[%s, %s, %s, %s, %s, %s, %s, %s, %s, %s]', c(p)))
 end
 
