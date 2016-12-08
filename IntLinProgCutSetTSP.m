@@ -11,7 +11,7 @@ function [p, d, t] = IntLinProgCutSetTSP(D)
 %     d: Float, total distance travelled in a round trip.
 %     t: Float, execution time for algorithm.
 %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %Spainish problem:
 % D=[ 0 515 353 422 482 673 634 815 609 166
