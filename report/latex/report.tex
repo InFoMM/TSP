@@ -138,6 +138,15 @@ To see how accurate our algorithms are, we need to know what the optimal solutio
 \label{tab:optimality}
 \end{table}
 
+Looking at the results from Table~\ref{tab:optimality}, we see that the \verb|increasing_loop| algorithm seems to give reasonable performance. More interestingly though, while \verb|tsp_ip_cut_set_oliver| is exact, its extension that allows sub-loops gives a shorter round trip distance. Additionally the linear programming relaxation gives partial paths between cities, and so the route is unphysical and has an undefined distance. 
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+Having seen the performance of the various schemes, we see that for large numbers of cities exact solvers are completely infeasible either due to memory constraints or infeasible execution times. The graph based solvers typically either try to enumerate all possible paths and quickly become undesirable, or have some form of greedy progression which can give a route in feasible time which can be expected to be near optimal.
+
+Conversely we have seen we can pose the problem as an integer programming problem, but most solvers struggle to produce a solution with a continuous path. Relaxations for linear solvers are quicker and more convergent, but typically give non-physical solution with partial paths between cities. 
+
 \clearpage
 \bibliography{references}
 \end{document}
