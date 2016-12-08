@@ -1,4 +1,4 @@
-function [ minPath, minCost, time ] = LPTSP( C, cityNames )
+function [ minPath, minCost, time ] = FD_LPTSP( C, cityNames )
 %	Solves TSP using an integer linear programming approach
 %
 % INPUT:
@@ -9,6 +9,7 @@ function [ minPath, minCost, time ] = LPTSP( C, cityNames )
 % OUTPUT:
 % -minCost: minimum total distance found by the algorithm
 % -minPath: optimal path found by the algorithm
+% -time: total time to complete the algorithm
 %
 % Author:
 %     Federico Danieli, December 2016.

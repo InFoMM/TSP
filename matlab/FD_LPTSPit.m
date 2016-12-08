@@ -1,4 +1,4 @@
-function [ minPath, minCost, time ] = LPTSPit( C, cityNames, maxIt )
+function [ minPath, minCost, time ] = FD_LPTSPit( C, cityNames, maxIt )
 %	Solves TSP using an integer linear programming approach that ignores
 %	cut-set constraints. However, multiple sub-cycle are borken in an
 %	iterative faction. At each iteration, a constraint is imposed to connect
@@ -15,6 +15,7 @@ function [ minPath, minCost, time ] = LPTSPit( C, cityNames, maxIt )
 % OUTPUT:
 % -minCost: minimum total distance found by the algorithm
 % -minPath: optimal path found by the algorithm
+% -time: total time to complete the algorithm
 %
 % Author:
 %     Federico Danieli, December 2016.

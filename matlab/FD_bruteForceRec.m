@@ -1,4 +1,4 @@
-function [ cost, path ] = bruteForceRec( A, cities, k, final )
+function [ cost, path ] = FD_bruteForceRec( A, cities, k, final )
 %	Recursive function for solving TSP using a brute force approach.
 % At each step, the cost of completing the path by moving following any
 % path originating from city k (the one I'm currently in) is computed, and
@@ -43,7 +43,7 @@ partialPath = zeros( n, n );
 
 % compute the cost of each path that passes by any of the next cities
 for i=1:n
-	[ partialCost( i ), partialPath( i, : ) ] = bruteForceRec( Apart, citiesPart, i, final );
+	[ partialCost( i ), partialPath( i, : ) ] = FD_bruteForceRec( Apart, citiesPart, i, final );
 end
 % update cost with the cost of moving from my current cuty
 addedCost = A( :, k );

@@ -1,4 +1,4 @@
-function [ minPath, minCost, time ] = stochastic( A, cityNames, maxIt, seed )
+function [ minPath, minCost, time ] = FD_stochastic( A, cityNames, maxIt, seed )
 %	A stochastic heuristic algorithm for solving the TSP
 %	At each iteration, a random permutation of the nodes is taken, and the
 %	cost associated to the corresponding path is computed. If it improves the
@@ -16,6 +16,7 @@ function [ minPath, minCost, time ] = stochastic( A, cityNames, maxIt, seed )
 % OUTPUT:
 % -minCost: minimum total distance found by the algorithm
 % -minPath: optimal path found by the algorithm
+% -time: total time to complete the algorithm
 %
 % Author:
 %     Federico Danieli, December 2016.

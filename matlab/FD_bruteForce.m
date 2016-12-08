@@ -1,7 +1,12 @@
-function [ path, cost, time ] = greedy( A, cityNames )
-%	Solves TSP using a greedy algorithm. 
-% Starting from city 1, proceed to the closest city. Repeat until all
-% cities have been covered.
+function [ path, cost, time ] = FD_bruteForce( A, cityNames )
+%	Solves TSP using a brute force algorithm. 
+%	The algorithm works recursively. Starting from node 1, it excludes it
+%	from the list of covered nodes and recursively invokes a function on all
+%	other nodes. The function returns the cost of the path built up so far,
+%	and stores the one with minimum cost.
+% Caveat: it is damn slow, since it explores all possible n! paths.
+% Moreover, it might run quickly out of memory, as it keeps on passing the
+% cost matrix.
 %
 %
 % INPUT:
@@ -12,6 +17,7 @@ function [ path, cost, time ] = greedy( A, cityNames )
 % OUTPUT:
 % -cost: minimum total distance found by the algorithm
 % -path: optimal path found by the algorithm
+% -time: total time to complete the algorithm
 %
 % Author:
 %     Federico Danieli, December 2016.
@@ -48,30 +54,18 @@ if nargin < 2 || isempty( cityNames )
 end
 
 A = tril(A,-1);
-A = A + A' + sum(sum(A)) * eye( size(A) );
+A = A + A';
 
 tic
+cities = 1:size( A, 1 );
 
-cost = 0;
-k = 1;
-path = k;
 
-for i=1:size( A, 1 )-1
-	% check the cost of moving to any other city
-	costNext = A( path(end), : );
-	% increase the cost of the ones that have already been visited
-	costNext( path ) = sum(costNext);
-	% take the min
-	[ costMin, k ] = min( costNext );
-	% move there and update cost
-	cost = cost + costMin;
-	path = [ path, k(1) ];
-end
-
-cost = cost + A( k, 1 );
+[ cost, path ] = FD_bruteForceRec( A, cities, 1, A(:,1) );
 path = [ path, 1 ];
 
 time = toc;
 
-disp( cityNames(path) );
+disp( cityNames( path ) );
+
 end
+
