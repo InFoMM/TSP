@@ -26,8 +26,8 @@ cycles = {};
 idx = find( x(1:m) > 0 ); % find nonzero elements identifying edges
 uga = zeros(n,n);	%initialize graph matrix
 for k=1:length(idx)
-	cont = [0,n-1:-1:1];
-	part = cumsum(cont);
+	count = [0,n-1:-1:1];
+	part = cumsum(count);
 	for j=1:n-1
 		if part(j) < idx(k) && idx(k)<=part(j+1)
 			i = idx(k)-part(j)+j;	% map the edge index into a nice (i,j) index
@@ -45,7 +45,7 @@ while i <= n
 	% starting from the last added node...
 	k = path( end );
 	% look connections to next node on the column/row of the graph matrix
-	nextTemp = [ find( uga(:,k)~=0 ), find( uga(k,:)~=0 )'];
+	nextTemp = [ find( uga(:,k)~=0 ); find( uga(k,:)~=0 )'];
 	% remove the nodes you've visited already
 	for j = 1:length( path )
 		nextTemp = nextTemp( nextTemp ~= path( j ) );

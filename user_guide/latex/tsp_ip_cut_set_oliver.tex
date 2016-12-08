@@ -1,0 +1,19 @@
+\subsection{\texttt{tsp\_ip\_cut\_set\_oliver}}
+\label{subsec:tsp_ip_cut_set_oliver}
+
+\begin{flushright}
+\textbf{Author} \\
+Oliver Sheridan-Methven
+\end{flushright}
+
+This formulates the travelling salesman problem into an integer programming problem, and then iteratively performs a version of the cut set constraint  to ensure no sub-loops are allowed.
+
+We can represent the edges that connect any two cities $ i $ and $ j $ by a $ n \times n $ matrix $ x_{ij} $, taking value on $ \{0, 1\} $, which represent an edge being absent or present respectively. We impose the constraint that there is only one path in and out of a city by $ \sum_{i} x_{ij} = 1 \: \forall j $ and  $ \sum_{j} x_{ij} = 1 \: \forall i $. We then input this formulation into the Matlab \verb|intlinprog| solver where we request integer solutions.
+
+The output produced does possibly contain loops, so to prevent this after the first iteration we form a constraint constructed as follows. Suppose $ m $ sub-loops are formed, where for the $ p_1 $-th sub-loop has indices in the set $ \mathbb{S}_{p_1} $. We know that a way to avoid this sub-loop is to force a revised solution to contain at least one edge from any index in $ \mathbb{S}_{p_1} $ to any index in $ \mathbb{S}_{p_1}^c $. Hence the $ p_1 $-th loop gives us one inequality constraint. As this holds for each of the ${p_1} $ sub-loops we have ${p_1} $ constraints after this iteration.
+
+Using our $ {p_1} $ constraints we repeat the integer solver, which is guaranteed then to not contain any of the prior $ {p_1} $ sub-loop. This new solution might then contain ${p_2} $ sub-loops. We can extend our constraint condition to now include $ p_1 + p_2 $ constraints. We iterate over the following process, where our constraint matrix increases on each iteration until there are no sub-loops, giving the an optimal exact solution (not necessarily unique).
+
+\input{tsp_ip_no_cut_set_oliver}
+\input{tsp_lp_no_cut_set_oliver}
+

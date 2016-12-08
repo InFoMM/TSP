@@ -1,0 +1,11 @@
+\subsubsection{\texttt{tsp\_lp\_no\_cut\_set\_oliver}}
+\label{subsubsec:tsp_lp_no_cut_set_oliver}
+
+\begin{flushright}
+\textbf{Author} \\
+Oliver Sheridan-Methven
+\end{flushright}
+
+Identical to the \verb|tsp_ip_cut_set_oliver| in Section~\ref{subsec:tsp_ip_cut_set_oliver} except we do not impose the cut set constraint and use a linear programming solver rather than an integer programming solver\footnote{We use Matlab's \texttt{linprog}.}. 
+
+The solutions produced allow for non-integer connections, which gives an unphysical solution to the problem. Furthermore, the nearest integer to the solution may not be feasible. This can be seen if we consider the element of $ x_{ij} $ which is non-integer, e.g. $ \frac{1}{2} $. if we force one of these values of $ \frac{1}{2} \to 1$ and the other to zero, then there is no guarantee that the resulting path may not respect the entering and leaving a city only once constraint\footnote{This can be seen more formally by noting that the entering and leaving a city only once constraint corresponds to $ x_{ij} $ having to be a latin-hypercube.}.

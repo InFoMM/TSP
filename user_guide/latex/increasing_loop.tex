@@ -1,0 +1,22 @@
+\subsection{\texttt{increasing\_loop}}
+\label{subsec:increasing_loop}
+
+\begin{flushright}
+\textbf{Author} \\
+Oliver Sheridan-Methven
+\end{flushright}
+
+The increasing loop algorithm is a stochastic algorithm which produces a possible solution for the travelling salesman problem, which will most likely not be optimal. However, the algorithm is constructed to hopefully provide near optimal solutions, and possibly some optimal, over a small set of runs, although it is not guaranteed. The hope is that this scheme is a reasonable compromise between execution time and optimality.
+
+The algorithm begins by randomly selecting three vertices and forming a loop between them, containing only these three\footnote{We can assume that we have more than 3 vertices, else the solution is trivial.}. Then with this sub-loop, we consider an arbitrary vertex not contained in the sub-loop. For this unconnected vertex, we evaluate the added distance to the loop if we were to include this vertex and form a larger sub-loop. We compute which connection in the loop would need to be changed that would given the minimal distance increase. This involves evaluating the added distance from replacing each existing connection.
+Noting what the increased distance would be, we repeat this for all the nodes not in the sub-loop, and hence find what the global minimal deformation to the loop would be if we had to include one of the unconnected points. We form this minimal connection, and then recompute what the next minimal global deformation would be. We perform this scheme iteratively until there are no unconnected vertices. A depiction of the scheme is shown in Figure~\ref{fig:increasing_loop}.
+
+
+\begin{figure}[htb]
+\centering
+\input{increasing_loops_tikz_figure}
+\caption{Progression of the increasing loop algorithm. Empty circles  represent the next global minimum for the next iteration.}
+\label{fig:increasing_loop}
+\end{figure}
+
+\input{forcefully_increasing_loop}

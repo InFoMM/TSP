@@ -1,0 +1,13 @@
+\subsubsection{\texttt{forcefully\_increasing\_loop}}
+\label{subsubsec:forcefully_increasing_loops}
+
+\begin{flushright}
+\textbf{Author} \\
+Oliver Sheridan-Methven
+\end{flushright}
+
+This algorithm is a quicker and less exhaustive implementation of the increasing loop algorithm as described in Section~\ref{subsec:increasing_loop}
+
+The algorithm begins by randomly selecting three vertices and forming a loop between them, containing only these three\footnote{We can assume that we have more than 3 vertices, else the solution is trivial.}. Then with this sub-loop, we consider random vertex not contained in the sub-loop. For this unconnected vertex, we evaluate the added distance to the loop if we were to include this vertex and form a larger sub-loop. We compute which connection in the loop would need to be changed that would given the minimal distance increase. We increase the sub-loop using this vertex to the configuration just previously computed. We perform this scheme iteratively until there are no unconnected vertices. A depiction of the scheme is shown in Figure~\ref{fig:increasing_loop}.
+
+

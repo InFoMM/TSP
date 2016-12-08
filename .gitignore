@@ -1,1 +1,7 @@
 *.m~
+user_guide/latex/guide.aux
+user_guide/latex/guide.log
+user_guide/latex/guide.out
+user_guide/latex/guide.synctex.gz
+user_guide/latex/guide.toc
+report/
