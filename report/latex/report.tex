@@ -6,61 +6,137 @@
 \input{preamble}
 
 \begin{document}
-	
-	
+
+
 \begin{center}
-	\begin{Large}
-		\textbf{Solving The Travelling Salesman Problem}\\
-	\end{Large}
-	\vspace{1ex}
-	\begin{large}
-		Oliver Sheridan-Methven 
-	\end{large}\\
-	December 2016 \\
+\begin{Large}
+\textbf{Solving The Travelling Salesman Problem}\\
+\end{Large}
+\vspace{1ex}
+\begin{large}
+Oliver Sheridan-Methven 
+\end{large}\\
+December 2016 \\
 \end{center}
 
 \section*{Abstract}
 We consider the travelling salesman problem for a set of 10 Spanish cities/provinces. We find a minimal round trip distance to be 2'999\:km. We compare the performance of some exact solvers, and various inexact faster solvers, suitable when exact solvers encounter memory constraints. We implement algorithms using graph theory, integer programming, and linear programming.
 
 \section{Introduction}
-	
+
 \subsection{Review of the travelling salesman problem}
 \label{subsec:review_of_tsp}
 
 There are multiple versions of the travelling salesman problem, each with small variations on what can constitute a solution. For clarity we state the problem as:
 \begin{description}
-	\item[The travelling salesman problem] A salesman needs to travel to $ n $ cities, each of which are separated from each other by some positive nonzero distance. What route should the salesman take that has the minimal total distance such that they visit each and every city only once, returning to the starting city.
+\item[The travelling salesman problem] A salesman needs to travel to $ n $ cities, each of which are separated from each other by some positive nonzero distance. What route should the salesman take that has the minimal total distance such that they visit each and every city only once, returning to the starting city.
 \end{description}
 
 
 \subsection{Spanish cities}
 \label{subsec:spanish_cities}
 
-In order to test these algorithms and have a gauge of their performance, we consider the example set of Spanish cities with the  distance matrix in Table~\ref{tab:distance_matrix}.
+In order to test any algorithms and have a gauge of their performance, we consider the example set of Spanish cities with the  distance matrix in Table~\ref{tab:distance_matrix}.
 
 \begin{table}[hbt]
-	\begin{center}
-		\begin{tabular}{|l|cccccccccc|}
-			\cline{2-11}
-			\multicolumn{1}{c|}{} & Ali.   & Val.  & Bar. & Pam. & San. & Mad. & Sal. & Sev. & Mal.  & Gra. \\
-			\hline 
-			Alicante	& 0   & 515  & 353 & 422 & 482 & 673 & 634 & 815 & 609  & 166 \\
-			Valencia    & 515 & 0    & 868 & 621 & 997 & 437 & 778 & 693 & 1046 & 349 \\
-			Barcelona	& 353 & 868  & 0   & 434 & 129 & 841 & 631 & 827 & 256  & 519 \\
-			Pamplona	& 422 & 621  & 434 & 0   & 544 & 407 & 212 & 393 & 538  & 352 \\
-			Santander	& 482 & 997  & 129 & 544 & 0   & 951 & 756 & 937 & 219  & 648 \\
-			Madrid		& 673 & 437  & 841 & 407 & 951 & 0   & 440 & 267 & 945  & 501 \\
-			Salamanca	& 634 & 778  & 631 & 212 & 756 & 440 & 0   & 363 & 474  & 564 \\
-			Sevilla		& 815 & 693  & 827 & 393 & 937 & 267 & 363 & 0   & 837  & 673 \\
-			Malaga		& 609 & 1046 & 256 & 538 & 219 & 945 & 474 & 837 & 0    & 697 \\
-			Granada		& 166 & 349  & 519 & 352 & 648 & 501 & 564 & 673 & 697  & 0   \\
-			\hline 
-		\end{tabular}
-		\caption{Distance matrix between 10 Spanish cities (km).}
-		\label{tab:distance_matrix}
-	\end{center}
+\begin{center}
+\begin{tabular}{|l|cccccccccc|}
+\cline{2-11}
+\multicolumn{1}{c|}{} & Ali.   & Val.  & Bar. & Pam. & San. & Mad. & Sal. & Sev. & Mal.  & Gra. \\
+\hline 
+Alicante	& 0   & 515  & 353 & 422 & 482 & 673 & 634 & 815 & 609  & 166 \\
+Valencia    & 515 & 0    & 868 & 621 & 997 & 437 & 778 & 693 & 1046 & 349 \\
+Barcelona	& 353 & 868  & 0   & 434 & 129 & 841 & 631 & 827 & 256  & 519 \\
+Pamplona	& 422 & 621  & 434 & 0   & 544 & 407 & 212 & 393 & 538  & 352 \\
+Santander	& 482 & 997  & 129 & 544 & 0   & 951 & 756 & 937 & 219  & 648 \\
+Madrid		& 673 & 437  & 841 & 407 & 951 & 0   & 440 & 267 & 945  & 501 \\
+Salamanca	& 634 & 778  & 631 & 212 & 756 & 440 & 0   & 363 & 474  & 564 \\
+Sevilla		& 815 & 693  & 827 & 393 & 937 & 267 & 363 & 0   & 837  & 673 \\
+Malaga		& 609 & 1046 & 256 & 538 & 219 & 945 & 474 & 837 & 0    & 697 \\
+Granada		& 166 & 349  & 519 & 352 & 648 & 501 & 564 & 673 & 697  & 0   \\
+\hline 
+\end{tabular}
+\caption{Distance matrix between 10 Spanish cities (km).}
+\label{tab:distance_matrix}
+\end{center}
 \end{table}
 
+\section{Algorithms}
+\label{sec:Algorithms}
+
+To solve this we implemented a variety of algorithms, which are detailed in ``The \texttt{TSP} algorithm suite'', which can be found at\footnote{At a later date an second version of this will be migrated to \href{https://github.com/oliversheridanmethven}{https://github.com/oliversheridanmethven}.}
+\begin{center}
+\href{https://github.com/InFoMM/TSP}{https://github.com/InFoMM/TSP}.
+\end{center}
+
+The algorithms which I implemented can be found in the user guide for the suite. They are detailed quite extensively there, and so for brevity we will only give a very brief outline of some here. We detail \verb|increasing_loop| and \verb|tsp_ip_cut_set_oliver|, which is a graph based algorithm and an integer programming algorithm respectively.
+
+\subsection{\texttt{increasing\_loop}}
+\label{subsec:increasing_loop}
+
+This begins by randomly picking three nodes in the network\footnote{Networks with three or less nodes are trivial to solve.} and forming a sub-loop from these. Then for an arbitrary node which is not in the sub-loop, we calculate what would be the minimal deformation of the existing sub-loop that would include this additional node. We perform this assessment for each of the nodes not includes in the sub-loop, and then whichever gives the minimum increase in the sub-loops round trip distance, we include this node into the sub-loop. We perform this process iteratively until there are no remaining unconnected nodes.
+
+\subsection{\texttt{tsp\_ip\_cut\_set\_oliver}}
+\label{subsec:tsp_ip_cut_set_oliver}
+
+We can represent the edges that connect any two cities $ i $ and $ j $ by a $ n \times n $ matrix $ x_{ij} $, taking value on $ \{0, 1\} $, which represent an edge being absent or present respectively. We impose the constraint that there is only one path in and out of a city by $ \sum_{i} x_{ij} = 1 \: \forall j $ and  $ \sum_{j} x_{ij} = 1 \: \forall i $. We then input this formulation into the Matlab \verb|intlinprog| solver where we request integer solutions.
+
+The output produced might contain loops, so to prevent this after the first iteration we form a constraint which ensures that we must form a connection between each of the sub-loops and the remaining points. We then iteratively add these constraints to the solver, at each stage eliminating some specific configuration of sub-loops, until there is only one global loop, which will be an optimal solution (not necessarily unique).
+
+Extensions of this where we drop the no sub-loop constraint, and also integer solutions are detailed in the \texttt{TSP} algorithm suite.
+
+\section{Performance}
+\label{sec:performance}
+
+We have two classes of algorithms, those which compute exact solutions, and those which compute approximate solutions. Those which compute exact solutions are accurate but may take a long time to execute, whereas the approximate solutions may be quick to run, but may give routes which may not be optimal (although possibly close to optimal). With any algorithm a compromise between execution time and accuracy has to be met, and so  depending on the need of the user, we present some characteristics of the algorithms available.
+
+\subsection{Execution times}
+\label{subsec:execution_times}
+
+We benchmark the average execution time of algorithms on the Spanish data set from Table~\ref{tab:distance_matrix} over 100 trials. Furthermore, generating random symmetric distance matrices of various sizes, we can see how the algorithms scale with the number of cities. The results are summarised  in Table~\ref{tab:execution_times}.
+
+
+\begin{table}[htb]
+\footnotesize
+\begin{center}
+\begin{tabular}{|L{0.3\textwidth}|c@{\hspace{1ex}}|c@{\hspace{1ex}}c@{\hspace{1ex}}c@{\hspace{1ex}}c@{\hspace{1ex}}c@{\hspace{1ex}}c@{\hspace{1ex}}c@{\hspace{1ex}}|}
+\hline
+\multicolumn{1}{|c|}{Algorithm}          & Spain & 6 & 8 & 10 & 12 & 15 & 20 & 30 \\ \hline
+\texttt{increasing\_loop}                &   $ 1.6 \! \cdot \! 10^{-4} $   & $ 2.2  \! \cdot \! 10^{-4} $ & $ 1.0  \! \cdot \! 10^{-4} $ & $ 1.0  \! \cdot \! 10^{-4} $ & $ 1.4 \! \cdot \!10^{-4} $ & $ 1.8 \! \cdot \! 10^{-4} $ & $ 2.7 \! \cdot \! 10^{-4} $ & $ 8.5 \! \cdot \! 10^{-4} $ \\
+\texttt{forcefully\_increasing\_loop}    &  $ 3.1 \! \cdot \! 10^{-4}$  & $ 6.7 \! \cdot \! 10^{-5}$ &  $ 9.6 \! \cdot \! 10^{-5}$ &  $ 9.1 \! \cdot \! 10^{-5}$ &  $ 1.3 \! \cdot \! 10^{-4}$ &  $ 1.7 \! \cdot \! 10^{-4}$ &  $ 7.2 \! \cdot \! 10^{-4}$ &  $ 4.6 \! \cdot \! 10^{-4}$ \\
+\texttt{tsp\_ip\_cut\_set\_oliver.m}     &    $ 5.7 \! \cdot \! 10^{-1}$   &  $ 9.1 \! \cdot \! 10^{-2}$ &  $ 2.0 \! \cdot \! 10^{-1}$ &  $ 1.8 \! \cdot \! 10^{0}$ &  \textasteriskcentered &\textasteriskcentered & \textasteriskcentered & \textasteriskcentered \\
+\texttt{tsp\_ip\_no\_cut\_set\_oliver.m} &    $ 2.1 \! \cdot \! 10^{-2}$    & $ 1.1 \! \cdot \! 10^{-2}$  & $ 1.1 \! \cdot \! 10^{-2}$  & $ 1.1 \! \cdot \! 10^{-2}$  & $ 1.1 \! \cdot \! 10^{-2}$  & $ 1.4 \! \cdot \! 10^{-2}$  & $ 1.5 \! \cdot \! 10^{-2}$  & $ 1.6 \! \cdot \! 10^{-2}$  \\
+\texttt{tsp\_lp\_no\_cut\_set\_oliver.m} &  $ 1.7 \! \cdot \! 10^{-2}$   & $ 1.1 \! \cdot \! 10^{-2}$ & $ 1.2 \! \cdot \! 10^{-2}$ & $ 1.4 \! \cdot \! 10^{-2}$ & $ 2.1 \! \cdot \! 10^{-2}$ & $ 2.1 \! \cdot \! 10^{-2}$ & $ 2.9 \! \cdot \! 10^{-2}$ & $ 3.4 \! \cdot \! 10^{-2}$ \\ \hline
+\end{tabular}
+\end{center}
+\caption{Execution times in seconds of various algorithms for the Spanish data set and randomly generated data. Entries marked with \textasteriskcentered{} indicate when the algorithms run out of memory.}
+\label{tab:execution_times}
+\end{table}
+
+Looking at the results here we see that for the \verb|increasing_loop| algorithm, the performance does not change much on this problem scale, suggesting that the problems are not large enough to be the rate limiting step. Notice further that this is relatively very fast, and typically takes no more than 5 or 10 runs on the Spanish data set to find the optimal solution.
+
+Conversely we can see that the \verb|tsp_ip_cut_set_oliver| is very slow, and while exact, quickly encounters memory issues and has poor scaling.
+
+\subsection{Comparison to optimality}
+\label{subsec:comparison_to_optimality}
+
+To see how accurate our algorithms are, we need to know what the optimal solution is. We present in Table~\ref{tab:optimality} the average fractional discrepancy error from optimality for the Spanish cities example from Table~\ref{tab:distance_matrix}.
+
+\begin{table}[htb]
+\begin{center}
+\begin{tabular}{|L{0.4\textwidth}|c|}
+\hline
+\multicolumn{1}{|c|}{Algorithm}          & Error \\ \hline
+\texttt{increasing\_loop}                &   5.7   \\
+\texttt{forcefully\_increasing\_loop}    &   3.2   \\
+\texttt{tsp\_ip\_cut\_set\_oliver.m}     &   -   \\
+\texttt{tsp\_ip\_no\_cut\_set\_oliver.m} &   -13.6   \\
+\texttt{tsp\_lp\_no\_cut\_set\_oliver.m} &   NA   \\ \hline
+\end{tabular}
+\end{center}
+\caption{The relative error of various algorithms measured against the exact solution to the Spanish data. Negative entries indicate solutions with shorter distances (contain loops), and entries marked NA give non physical routes such as those with partial edges.}
+\label{tab:optimality}
+\end{table}
 
 \clearpage
 \bibliography{references}
