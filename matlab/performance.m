@@ -34,6 +34,15 @@ algo_stats(M, @tsp_lp_no_cut_set_oliver, 'Linear solution allowing loops and par
 algo_stats(M, @tsp_ip_cut_set_oliver, 'Integer solution not allowing loops.')
 
 
+%%%%%% For more comprehensive statistics %%%%%%%
+algo_stats_comp(@increasing_loop, 'Increasing loop algorithm.')
+algo_stats_comp(@forcefully_increasing_loop, 'Forcefully increasing loop algorithm.')
+algo_stats_comp(@tsp_ip_no_cut_set_oliver, 'Integer solution allowing loops.')
+algo_stats_comp(@tsp_ip_cut_set_oliver, 'Integer solution not allowing loops.')
+
+
+
+
 
 % Shows the performance on a random matrix.
 for m=[3, 6, 10, 12, 14, 16, 18, 20, 30, 40, 50]

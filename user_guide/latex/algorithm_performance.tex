@@ -6,8 +6,44 @@ We have two classes of algorithms, those which compute exact solutions, and thos
 \subsection{Execution times}
 \label{subsec:execution_times}
 
+We benchmark the average execution time of algorithms on the Spanish data set from Table~\ref{tab:distance_matrix} over 100 trials. Furthermore, generating random symmetric distance matrices of various sizes, we can see how the algorithms scale with the number of cities. The results are summarised  in Table~\ref{tab:execution_times}.
+
+\begin{table}[htb]
+	\footnotesize
+\begin{center}
+\begin{tabular}{|L{0.3\textwidth}|c@{\hspace{1ex}}|c@{\hspace{1ex}}c@{\hspace{1ex}}c@{\hspace{1ex}}c@{\hspace{1ex}}c@{\hspace{1ex}}c@{\hspace{1ex}}c@{\hspace{1ex}}|}
+\hline
+\multicolumn{1}{|c|}{Algorithm}          & Spain & 6 & 8 & 10 & 12 & 15 & 20 & 30 \\ \hline
+\texttt{increasing\_loop}                &   $ 1.6 \! \cdot \! 10^{-4} $   & $ 2.2  \! \cdot \! 10^{-4} $ & $ 1.0  \! \cdot \! 10^{-4} $ & $ 1.0  \! \cdot \! 10^{-4} $ & $ 1.4 \! \cdot \!10^{-4} $ & $ 1.8 \! \cdot \! 10^{-4} $ & $ 2.7 \! \cdot \! 10^{-4} $ & $ 8.5 \! \cdot \! 10^{-4} $ \\
+\texttt{forcefully\_increasing\_loop}    &  $ 3.1 \! \cdot \! 10^{-4}$  & $ 6.7 \! \cdot \! 10^{-5}$ &  $ 9.6 \! \cdot \! 10^{-5}$ &  $ 9.1 \! \cdot \! 10^{-5}$ &  $ 1.3 \! \cdot \! 10^{-4}$ &  $ 1.7 \! \cdot \! 10^{-4}$ &  $ 7.2 \! \cdot \! 10^{-4}$ &  $ 4.6 \! \cdot \! 10^{-4}$ \\
+\texttt{tsp\_ip\_cut\_set\_oliver.m}     &    $ 5.7 \! \cdot \! 10^{-1}$   &  $ 9.1 \! \cdot \! 10^{-2}$ &  $ 2.0 \! \cdot \! 10^{-1}$ &  $ 1.8 \! \cdot \! 10^{0}$ &  \textasteriskcentered &\textasteriskcentered & \textasteriskcentered & \textasteriskcentered \\
+\texttt{tsp\_ip\_no\_cut\_set\_oliver.m} &   s   & 6 & 8 & 10 & 12 & 15 & 20 & 30 \\
+\texttt{tsp\_lp\_no\_cut\_set\_oliver.m} &   s   & 6 & 8 & 10 & 12 & 15 & 20 & 30 \\ \hline
+\end{tabular}
+\end{center}
+\caption{text}
+\label{tab:execution_times}
+\end{table}
 
 \subsection{Comparison to optimality}
 \label{subsec:comparison_to_optimality}
+
+To see how accurate our algorithms are, we need to know what the optimal solution is. We present in Table~\ref{tab:optimality} the average fractional discrepancy error from optimality for the Spanish cities example from Table~\ref{tab:distance_matrix}.
+
+\begin{table}[htb]
+\begin{center}
+\begin{tabular}{|L{0.4\textwidth}|c|}
+\hline
+\multicolumn{1}{|c|}{Algorithm}          & Error \\ \hline
+\texttt{increasing\_loop}                &   5.7   \\
+\texttt{forcefully\_increasing\_loop}    &   3.2   \\
+\texttt{tsp\_ip\_cut\_set\_oliver.m}     &   -   \\
+\texttt{tsp\_ip\_no\_cut\_set\_oliver.m} &   s   \\
+\texttt{tsp\_lp\_no\_cut\_set\_oliver.m} &   s   \\ \hline
+\end{tabular}
+\end{center}
+\caption{text}
+\label{tab:optimality}
+\end{table}
 
 \clearpage
