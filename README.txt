@@ -21,7 +21,7 @@ Description:
 
 Large File Tracking:
 
-	We use git lfs (Git Large File Tracking) to commit any pdf documents.
+	We use git lfs (Git Large File Tracking) to commit any pdf documents. This will need to be installed to view the users guide!
 
 Function signatures:
 
