@@ -5,3 +5,9 @@ user_guide/latex/guide.out
 user_guide/latex/guide.synctex.gz
 user_guide/latex/guide.toc
 report/
+*.log
+*.aux
+*.out
+*.synctex.gz
+*.toc
+*.dvi

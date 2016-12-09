@@ -11,6 +11,8 @@ A list of various algorithms and a brief description is provided in Table~\ref{t
 \multicolumn{1}{|c|}{Algorithm}  % use \texttt{text} instead of \verb|text| to allow line breaks for long function names.
 & \multicolumn{1}{c|}{Description} \\
 \hline 
+\texttt{edgeupperbound.m} & Adds the cheapest unused edge that won't create a fork or a loop until a path is formed, then adds in the final edge to create a loop. \\
+\hdashline
 \texttt{forcefully\_increasing\_loop.m} & Begins with a small loop, progressively increasing the size of the route by forcefully including a random city by changing the route by the amount. \\
 \hdashline
 \texttt{increasing\_loop.m} & Begins with a small loop, progressively increasing the size of the route by including the city which increases the distance by the minimal amount. \\

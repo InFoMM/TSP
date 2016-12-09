@@ -1,0 +1,39 @@
+\subsection{\texttt{edgeupperbound}}
+\label{subsec:degeupperbound}
+
+\begin{flushright}
+\textbf{Author} \\
+Mel Beckerleg
+\end{flushright}
+
+\subsection{Cheapest edge algorithm}
+
+An algorithm to provide if not an exact solution at least an 'intelligent' upper bound. The method is to construct a path between the cities by adding the 'cheapest' unused edge that does not create a fork or a loop. The 'no fork' condition is important as it allows us to add an edge to the final path to create the desired cycle, whilst the 'no loop' condition imposes that there are no 'sub-loops' within the graph (so it is possible to reach every city from every other). 
+
+An example of the method applied to a subgraph of the Spanish problem (considering only Barcelona, Santander, Alicante and Malage) can be seen in (\ref{fig:cheapestedgeexample}). The two cheapest edges are added without difficulty. The third cheapest (Barcelona-Malaga) however, is not added, as this would create a fork from Barcelona. Thus the next edge added is between Barcelona and Alicante. Finally, the only remaining edge to add is from Alicante to Malaga. This gives a route with cost 1306, which can be shown (by exhaustion) is the optimal cost. However, if, for example, the distance between Santander and Alicante, had been 477, the route Alicante-Barcelona-Malaga-Santander-Alicante would have been preferable, with a cost of 1305. Thus, the algorithm produces an informed upper-bound but doesn't not guarantee optimality. 
+
+\begin{figure}[h]\centering
+    \begin{subfigure}[b]{0.3\textwidth}
+        \includegraphics[width=\textwidth]{cheapestedgeexamplesubgraph}
+        \caption{A subgraph of the Spanish TSP  with four cities}
+        \label{fig:examplesubgraph}
+    \end{subfigure}
+    ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc. 
+      %(or a blank line to force the subfigure onto a new line)
+    \begin{subfigure}[b]{0.3\textwidth}
+        \includegraphics[width=\textwidth]{cheapestedgeexamplefirstwo}
+        \caption{The two cheapest edges are added without difficulty}
+        \label{fig:examplefirstwo}
+    \end{subfigure}
+    ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc. 
+    %(or a blank line to force the subfigure onto a new line)
+    \begin{subfigure}[b]{0.3\textwidth}
+        \includegraphics[width=\textwidth]{cheapestedgeexamplefinal}
+        \caption{The final graph has a cost of 1306km}
+        \label{fig:examplefinal}
+    \end{subfigure}
+    \caption{The cheapest edge algorithm applied to a four city sub-problem}\label{fig:cheapestedgeexample}
+\end{figure}
+
+
+\input{edgeupperbound.m}
