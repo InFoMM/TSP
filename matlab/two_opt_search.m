@@ -1,4 +1,5 @@
 function [ p, d, t ] = two_opt_search( M )
+% Author: Ana Osojnik
 %tabu_search Summary of this function goes here
 %   Detailed explanation goes here
 

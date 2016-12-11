@@ -1,5 +1,4 @@
-%% Travelling Salesman Problem (GRAPHS)
-%
+function [route,v,cost,time]=nearestneigh(cities, D, c_0)
 % Author: Raquel Gonzalez Farina, December 2016
 %
 % It solves the TSP from the graph theoretical side (1)
@@ -20,8 +19,7 @@
 %   v:      Vertices of the optimal route.
 %   cost:   Total cost/distance.
 %   time:   Computational time.
-%
-function [route,v,cost,time]=nearestneigh(cities, D, c_0)
+
 
 % [cities, D]=distances;
 % c_0=1;

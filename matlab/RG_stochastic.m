@@ -1,3 +1,4 @@
+function [opt_v, opt_cost, time]=RG_stochastic(iter, D)
 %% Travelling Salesman Problem (GRAPHS)
 %
 % Author: Raquel Gonzalez Farina, December 2016
@@ -22,9 +23,6 @@
 %
 % Use [~, D]=distances to generate the matrix for distances between cities
 % in Spain
-%
-function [opt_v, opt_cost, time]=RG_stochastic(iter, D)
-
 tic
 
 n=size(D,1);

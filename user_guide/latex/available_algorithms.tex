@@ -13,15 +13,50 @@ A list of various algorithms and a brief description is provided in Table~\ref{t
 \hline 
 \texttt{edgeupperbound.m} & Adds the cheapest unused edge that won't create a fork or a loop until a path is formed, then adds in the final edge to create a loop. \\
 \hdashline
+\texttt{FD\_bruteForce.m} & Explores all possible paths recursively tracking the total distance of smaller networks. \\
+\hdashline
+\texttt{FD\_dynamicProgramming.m} & Explores all possible paths ending in a given city, iteratively increasing the network size using the Held-Karp algorithm. \\
+\hdashline
+\texttt{FD\_greedy.m} & Greedy algorithm increases the path size by including the nearest city. \\
+\hdashline
+\texttt{FD\_LPTSP.m} &  Integer linear programming solver. \\
+\hdashline
+\texttt{FD\_LPTSPit.m} &  Integer linear programming solver which ignores the cut-set constraint, but does constrain against sub-cycles. \\
+\hdashline
+\texttt{FD\_stochastic.m} & Random permutations of paths are considered for a given number of trials. \\
+\hdashline
 \texttt{forcefully\_increasing\_loop.m} & Begins with a small loop, progressively increasing the size of the route by forcefully including a random city by changing the route by the amount. \\
+\hdashline
+\texttt{greedy\_algorith\_TSP.m} & Greedy algorithm moves to shortest edge, not allowing for sub-loops. \\
+\hdashline
+\texttt{greedy\_algorith\_TSP\_all.m} & Greedy algorithm moves to shortest edge, not allowing for sub-loops, and uses a specific starting point. \\
 \hdashline
 \texttt{increasing\_loop.m} & Begins with a small loop, progressively increasing the size of the route by including the city which increases the distance by the minimal amount. \\
 \hdashline
-\texttt{tsp\_ip\_cut\_set\_oliver.m} &  Integer programming solver which performs the cut-set constraint until no sub-loops exist. \\
+\texttt{IntLinProgCutSetTSP.m} & Integer programming method without the cut-set constraint. \\
+\hdashline
+\texttt{linprogtsp2.m} &  Miller-Tucker-Zemlin  algorithm, uses cut-set constraints. \\
+\hdashline
+\texttt{nearestneigh.m} &  A greedy nearest neighbours algorithm added the shortest possible edge.  \\
+\hdashline
+\texttt{optimal\_greedy\_TSP.m} &  A greedy nearest neighbours algorithm using a specific starting point.  \\
+\hdashline
+\texttt{RG\_stochastic.m} &  Generates random paths iteratively saving the best result for a chosen number of iterations. \\
+\hdashline
+\texttt{search\_permutations.m} &  Exhaustive search over all path permutations. \\
+\hdashline
+\texttt{stochastic\_TSP.m} &  Randomly generates paths, using the shortest over a fixed number of iterations. \\
+\hdashline
+\texttt{tabu\_search.m} &  Performs a Tabu search. \\
 \hdashline
 \texttt{tsp\_ip\_no\_cut\_set\_oliver.m} & Integer programming solver which allows sub-loops.\\
 \hdashline
 \texttt{tsp\_lp\_no\_cut\_set\_oliver.m} & Linear programming solver which allows sub loops and partial journeys (non-physical).\\
+\texttt{two\_opt\_search.m} &  Performs a 2-opt local search. \\
+\hdashline
+\texttt{TwoHeadedSnake.m} &  A two headed greedy algorithm for finding a Hamiltonian cycle by adding the nearest two cities iteratively. \\
+\hdashline
+\texttt{twoopt.m} &  Performs a 2-opt local search. \\
 \hline
 \end{tabularx}
 \caption{Available algorithms for solving the travelling salesman problem, giving the function name and a brief description.}
