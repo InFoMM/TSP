@@ -20,7 +20,7 @@ December 2016 \\
 \end{center}
 
 \section*{Abstract}
-We consider the travelling salesman problem for a set of 10 Spanish cities/provinces. We find a minimal round trip distance to be 2'999\:km. We compare the performance of some exact solvers, and various inexact faster solvers, suitable when exact solvers encounter memory constraints. We implement algorithms using graph theory, integer programming, and linear programming.
+We consider the travelling salesman problem for a set of 10 Spanish cities/provinces. We find a minimal round trip distance to be 2'999\:km. We compare the performance of some exact solvers, and various inexact faster solvers, suitable when exact solvers encounter memory/performance constraints. We implement algorithms using graph theory, integer programming, and linear programming.
 
 \section{Introduction}
 
@@ -29,14 +29,14 @@ We consider the travelling salesman problem for a set of 10 Spanish cities/provi
 
 There are multiple versions of the travelling salesman problem, each with small variations on what can constitute a solution. For clarity we state the problem as:
 \begin{description}
-\item[The travelling salesman problem] A salesman needs to travel to $ n $ cities, each of which are separated from each other by some positive nonzero distance. What route should the salesman take that has the minimal total distance such that they visit each and every city only once, returning to the starting city.
+\item[The travelling salesman problem] A salesman needs to travel to $ n $ cities, each of which are separated from each other by some positive nonzero distance. What route should the salesman take that has the minimal total distance such that they visit each and every city only once, returning to the starting city?
 \end{description}
 
 
 \subsection{Spanish cities}
 \label{subsec:spanish_cities}
 
-In order to test any algorithms and have a gauge of their performance, we consider the example set of Spanish cities with the  distance matrix in Table~\ref{tab:distance_matrix}.
+In order to test any algorithms and have a gauge of their performance, we consider the example set of Spanish cities with the  distance matrix in Table~\ref{tab:distance_matrix}. Notice that the distance matrix is symmetric. 
 
 \begin{table}[hbt]
 \begin{center}
@@ -61,10 +61,35 @@ Granada		& 166 & 349  & 519 & 352 & 648 & 501 & 564 & 673 & 697  & 0   \\
 \end{center}
 \end{table}
 
+\subsection{The shortest route}
+\label{subsec:the_shortest_route}
+
+Before we proceed in the discussion of the algorithms used to find the solutions to this problem, we are fortunate that this problem is small enough that we can enumerate all the possible paths. Computing all these paths we find that there is one solution with a total round trip distance of 2'999\:km which follows the route shown in Figure~\ref{fig:fastest_route_around_spannish_cities}. We should notice that there is a degeneracy in this solution based on which city we choose as our starting point, and if we decide to take a clockwise or counter-clockwise route. 
+
+\begin{figure}[htb]
+\begin{center}
+\begin{tikzpicture}
+\node (a) at (0, 0) {Malaga};
+\node (b) at (0, 1.5) {Granada};
+\node (c) at (0, 3) {Alicante};
+\node (d) at (3, 3) {Valencia};
+\node (e) at (6, 3) {Barcelona};
+\node (f) at (9, 3) {Pamplona};
+\node (g) at (9, 1.5) {Santander};
+\node (h) at (9, 0) {Madrid};
+\node (i) at (6, 0) {Salamanca};
+\node (j) at (3, 0) {Sevilla};
+\draw (a)--(b)--(c)--(d)--(e)--(f)--(g)--(h)--(i)--(j)--(a);
+\end{tikzpicture}
+\caption{The fastest route around Spanish cities with the distances given in Table~\ref{tab:distance_matrix}.}
+\label{fig:fastest_route_around_spannish_cities}
+\end{center}
+\end{figure}
+
 \section{Algorithms}
 \label{sec:Algorithms}
 
-To solve this we implemented a variety of algorithms, which are detailed in ``The \texttt{TSP} algorithm suite'', which can be found at\footnote{At a later date an second version of this will be migrated to \href{https://github.com/oliversheridanmethven}{https://github.com/oliversheridanmethven}.}
+To solve the travelling salesman problem we implemented a variety of algorithms, which are detailed in ``The \texttt{TSP} algorithm suite'', which can be found at\footnote{At a later date a second version of this will be migrated to \href{https://github.com/oliversheridanmethven}{https://github.com/oliversheridanmethven}.}
 \begin{center}
 \href{https://github.com/InFoMM/TSP}{https://github.com/InFoMM/TSP}.
 \end{center}
@@ -74,21 +99,29 @@ The algorithms which I implemented can be found in the user guide for the suite.
 \subsection{\texttt{increasing\_loop}}
 \label{subsec:increasing_loop}
 
-This begins by randomly picking three nodes in the network\footnote{Networks with three or less nodes are trivial to solve.} and forming a sub-loop from these. Then for an arbitrary node which is not in the sub-loop, we calculate what would be the minimal deformation of the existing sub-loop that would include this additional node. We perform this assessment for each of the nodes not includes in the sub-loop, and then whichever gives the minimum increase in the sub-loops round trip distance, we include this node into the sub-loop. We perform this process iteratively until there are no remaining unconnected nodes.
+This begins by randomly picking three nodes in the network\footnote{Networks with three or less nodes are trivial to solve.} and forming a sub-loop from these. Then for an arbitrary node which is not in the sub-loop, we calculate what would be the minimal deformation of the existing sub-loop that would include this additional node. We perform this assessment for each of the nodes not included in the sub-loop, and then whichever gives the minimum increase in the sub-loop's round trip distance, we include this node into the sub-loop. We perform this process iteratively until there are no remaining unconnected nodes. This algorithm is demonstrated in Figure~\ref{fig:increasing_loop}.
+
+\begin{figure}[htb]
+\centering
+\input{increasing_loop_figure_tikz}
+\caption{Progression of the increasing loop algorithm. Empty circles  represent the next global minimum for the next iteration.}
+\label{fig:increasing_loop}
+\end{figure}
+
 
 \subsection{\texttt{tsp\_ip\_cut\_set\_oliver}}
 \label{subsec:tsp_ip_cut_set_oliver}
 
-We can represent the edges that connect any two cities $ i $ and $ j $ by a $ n \times n $ matrix $ x_{ij} $, taking value on $ \{0, 1\} $, which represent an edge being absent or present respectively. We impose the constraint that there is only one path in and out of a city by $ \sum_{i} x_{ij} = 1 \: \forall j $ and  $ \sum_{j} x_{ij} = 1 \: \forall i $. We then input this formulation into the Matlab \verb|intlinprog| solver where we request integer solutions.
+We can represent the edges that connect any two cities $ i $ and $ j $ by a $ n \times n $ matrix $ x_{ij} $, taking values in $ \{0, 1\} $, which represent an edge being absent or present respectively. We impose the constraint that there is only one path in and out of a city by $ \sum_{i} x_{ij} = 1 \: \forall j $ and  $ \sum_{j} x_{ij} = 1 \: \forall i $. We then input this formulation into the Matlab \verb|intlinprog| solver where we request integer solutions.
 
-The output produced might contain loops, so to prevent this after the first iteration we form a constraint which ensures that we must form a connection between each of the sub-loops and the remaining points. We then iteratively add these constraints to the solver, at each stage eliminating some specific configuration of sub-loops, until there is only one global loop, which will be an optimal solution (not necessarily unique).
+The output produced might contain loops, so to prevent this, after the first iteration we form a constraint which ensures that we must form a connection between each of the sub-loops and the remaining points. We then iteratively add these constraints to the solver, at each stage eliminating some specific configuration of sub-loops, until there is only one global loop, which will be an optimal solution (not necessarily unique).
 
 Extensions of this where we drop the no sub-loop constraint, and also integer solutions are detailed in the \texttt{TSP} algorithm suite.
 
 \section{Performance}
 \label{sec:performance}
 
-We have two classes of algorithms, those which compute exact solutions, and those which compute approximate solutions. Those which compute exact solutions are accurate but may take a long time to execute, whereas the approximate solutions may be quick to run, but may give routes which may not be optimal (although possibly close to optimal). With any algorithm a compromise between execution time and accuracy has to be met, and so  depending on the need of the user, we present some characteristics of the algorithms available.
+We have two classes of algorithms, those which compute exact solutions, and those which compute approximate solutions. Those which compute exact solutions are accurate but may take a long time to execute, whereas the approximate solutions may be quick to run, but may give routes which are not optimal (although possibly close to optimal). With any algorithm a compromise between execution time and accuracy has to be met, and so  depending on the need of the user, we present some characteristics of the algorithms available.
 
 \subsection{Execution times}
 \label{subsec:execution_times}
@@ -134,7 +167,7 @@ To see how accurate our algorithms are, we need to know what the optimal solutio
 \texttt{tsp\_lp\_no\_cut\_set\_oliver.m} &   NA   \\ \hline
 \end{tabular}
 \end{center}
-\caption{The relative error of various algorithms measured against the exact solution to the Spanish data. Negative entries indicate solutions with shorter distances (contain loops), and entries marked NA give non physical routes such as those with partial edges.}
+\caption{The relative error of various algorithms measured against the exact solution to the Spanish data. Negative entries indicate solutions with shorter distances (contain sub-loops), and entries marked NA give non physical routes such as those with partial edges.}
 \label{tab:optimality}
 \end{table}
 
@@ -145,7 +178,7 @@ Looking at the results from Table~\ref{tab:optimality}, we see that the \verb|in
 
 Having seen the performance of the various schemes, we see that for large numbers of cities exact solvers are completely infeasible either due to memory constraints or infeasible execution times. The graph based solvers typically either try to enumerate all possible paths and quickly become undesirable, or have some form of greedy progression which can give a route in feasible time which can be expected to be near optimal.
 
-Conversely we have seen we can pose the problem as an integer programming problem, but most solvers struggle to produce a solution with a continuous path. Relaxations for linear solvers are quicker and more convergent, but typically give non-physical solution with partial paths between cities. 
+Conversely we have seen we can pose the problem as an integer programming optimisation, but most solvers struggle to produce a solution with a continuous path. Relaxations for linear solvers are quicker and more convergent, but typically give non-physical solutions with partial paths between cities. 
 
 \clearpage
 \bibliography{references}
