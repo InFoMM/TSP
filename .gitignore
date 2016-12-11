@@ -11,3 +11,5 @@ report/
 *.synctex.gz
 *.toc
 *.dvi
+*.bbl
+*.blg
