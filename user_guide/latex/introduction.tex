@@ -40,13 +40,22 @@ Granada		& 166 & 349  & 519 & 352 & 648 & 501 & 564 & 673 & 697  & 0   \\
 \end{center}
 \end{table}	
 
-With the distances specified in Table~\ref{tab:distance_matrix}, we can show (using one of our exact algorithms) that the optimal route is 2'999\:km long and follows:\\
+With the distances specified in Table~\ref{tab:distance_matrix}, we can show (using one of our exact algorithms) that the optimal route is 2'999\:km long and follows the path shown in Figure~\ref{fig:fastest_route_around_spannish_cities}. 
 
 \begin{figure}[htb]
 \begin{center}
 \begin{tikzpicture}
-\foreach \ang/\lab in {0/Alicante, 36/Granada, 72/Malaga, 108/Sevilla, 144/Salamanca, 180/Madrid, 216/Santander, 252/Pamplona, 288/Barcelona, 324/Valencia} {	\node[] (\ang) at (\ang:4){\lab}; }
-\draw (0)--(36)--(72)--(108)--(144)--(180)--(216)--(252)--(288)--(324)--(0);
+\node (a) at (0, 0) {Malaga};
+\node (b) at (0, 1.5) {Granada};
+\node (c) at (0, 3) {Alicante};
+\node (d) at (3, 3) {Valencia};
+\node (e) at (6, 3) {Barcelona};
+\node (f) at (9, 3) {Pamplona};
+\node (g) at (9, 1.5) {Santander};
+\node (h) at (9, 0) {Madrid};
+\node (i) at (6, 0) {Salamanca};
+\node (j) at (3, 0) {Sevilla};
+\draw (a)--(b)--(c)--(d)--(e)--(f)--(g)--(h)--(i)--(j)--(a);
 \end{tikzpicture}
 \caption{The fastest route around Spanish cities with the distances given in Table~\ref{tab:distance_matrix}.}
 \label{fig:fastest_route_around_spannish_cities}
