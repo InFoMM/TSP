@@ -6,7 +6,9 @@
 Clint Wong
 \end{flushright}
 
-A integer linear program (ILP) which solves the travelling salesman problem using the Miller-Tucker-Zemlin formulation. For an $n$-node problem, the integer variables $u_1, \dots ,u_n$ are assigned to nodes $1\dots n$ respectively. These variables, which act as labels, replaces the  
+An integer linear program (ILP) which solves the travelling salesman problem with the Miller-Tucker-Zemlin formulation. For an $n$-node problem, $n$ additional integer variables $u_1, \dots ,u_n$ are introduced and assigned to nodes $1\dots n$ respectively. These variables, which act as node labels, replace the conventional cut-set constraints via $(n-1)(n-2)$ additional inequality constraints on $x_{ij}$ and $u_i$. This formulation also enforces the solution to be a Hamiltonian cycle. We input this formulation into the Matlab \texttt{intlinprog} solver.  
+
+Although unphysical, this program also has the option to relax the integer constraints to reduce this to a linear program (LP). We input this formulation into the Matlab \texttt{linprog} solver instead. 
 
 
 

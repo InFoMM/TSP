@@ -36,7 +36,7 @@ A list of various algorithms and a brief description is provided in Table~\ref{t
 \hdashline
 \texttt{IntLinProgCutSetTSP.m} & Integer programming method without the cut-set constraint. \\
 \hdashline
-\texttt{linprogtsp2.m} &  Miller-Tucker-Zemlin  algorithm, uses cut-set constraints. \\
+\texttt{linprogtsp2.m} &  Integer linear program in the Miller-Tucker-Zemlin formulation. \\
 \hdashline
 \texttt{nearestneigh.m} &  A greedy nearest neighbours algorithm added the shortest possible edge.  \\
 \hdashline
@@ -57,7 +57,7 @@ A list of various algorithms and a brief description is provided in Table~\ref{t
 \hdashline
 \texttt{TwoHeadedSnake.m} &  A two headed greedy algorithm for finding a Hamiltonian cycle by adding the nearest two cities iteratively. \\
 \hdashline
-\texttt{twoopt.m} &  Performs a 2-opt local search. \\
+\texttt{twoopt.m} &  2-opt algorithm, an iterative algorithm which optimises the current Hamiltonian cycle by rerouting. \\
 \hline
 \end{tabularx}
 \caption{Available algorithms for solving the travelling salesman problem, giving the function name and a brief description.}
