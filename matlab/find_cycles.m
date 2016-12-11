@@ -1,4 +1,5 @@
 function [ idx, cycles, no_cycles, cycle_lengths ] = find_cycles( sol, cities )
+% Author: Ana Osojnik
 %find_cycles function finds cycles given the output from intlinprog
 
 if nargin < 2

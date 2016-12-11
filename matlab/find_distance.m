@@ -1,4 +1,5 @@
 function [ d ] = find_distance( p, M )
+% Author: Ana Osojnik
 %UNTITLED2 Summary of this function goes here
 %   Detailed explanation goes here
 
