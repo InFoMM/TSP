@@ -1,0 +1,20 @@
+\subsection{\texttt{twoopt}}
+\label{subsec:twoopt}
+
+\begin{flushright}
+\textbf{Author} \\
+Clint Wong
+\end{flushright}
+
+An iterative algorithm which optimises a given Hamiltonian cycle by removing two edges at random and reform the Hamiltonian cycle by cross-linking the four nodes that have degree $1$ (see Figure ~\ref{fig:twoopt}). For the $2$-opt algorithm, this new choice is unique. 
+
+\begin{figure}[h]\centering
+        \includegraphics[width=0.7\textwidth]{../figures/twoopt.png}
+        \caption{The edge replacement procedure of the $2$-opt algorithm on a Hamiltonian cycle. In this example, edge $1$ and edge $2$ are being replaced. }
+        \label{fig:twoopt}
+\end{figure}
+
+
+The algorithm then calculates the total weight of the new cycle and accepts it if this new girth estimate is lower. Finally, it terminates when the girth estimate has not been improved for $1000$ consecutive iterations. This condition can be relaxed or tighten depending on the problem size.  
+
+For an $n$-node problem, the algorithm initialises with the cycle $1 \rightarrow 2 \rightarrow \dots \rightarrow n \rightarrow 1$ by default. 
