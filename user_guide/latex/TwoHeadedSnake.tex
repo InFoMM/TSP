@@ -1,0 +1,12 @@
+\subsection{\texttt{TwoHeadedSnake}}
+\label{subsec:twoheadedsnake}
+
+\begin{flushright}
+	\textbf{Author} \\
+	Jonathan Peters
+\end{flushright}
+
+This algorithm is a variation of the greedy algorithm. Where the greedy algorithm starts at points and then maps out the cycle by choosing the closest city at each step, the Two Headed Snake algorithm expands in both directions simultaneously. 
+
+A random node is selected to start with. Then the path splits in two directions. With each iteration, one end of the path will expand to the closest city which is not yet part of the path. For the final iteration, the two ends of the path are forcibly joined, which guarantees a cycle.
+
