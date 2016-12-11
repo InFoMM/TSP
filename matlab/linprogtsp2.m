@@ -2,7 +2,7 @@ function [p,d,C]=linprogtsp2(M,flag)
 % Author:
 %     Clint Wong, December 2016.
 % Description:
-%     Simple Miller-Tucker-Zemlin  algorithm which solves the TSP.
+%     Simple Miller-Tucker-Zemlin algorithm which solves the TSP.
 %     For n cities, n dummy
 %     variables u_1,...,u_n are introduced to impose the cut-set constraints.
 % Input:

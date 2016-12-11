@@ -2,8 +2,8 @@ function [p,d,t] = twoopt(M)
 % Author:
 %     Clint Wong, December 2016.
 % Description:
-%     Initialise with route 1, 2, ..., 10, 1.
-%     Replace 2 edges at random and accept the new route if it is shorter.
+%     Initialise with route 1, 2, ..., n, 1.
+%     Replace 2 edges at random and accept the new cycle if it is shorter.
 %     Terminate when the current distance is not lowered by tol for 1000
 %     consecutive trials. 
 % Input:
