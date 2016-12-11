@@ -8,7 +8,7 @@ Oliver Sheridan-Methven
 
 This formulates the travelling salesman problem into an integer programming problem, and then iteratively performs a version of the cut set constraint  to ensure no sub-loops are allowed.
 
-We can represent the edges that connect any two cities $ i $ and $ j $ by a $ n \times n $ matrix $ x_{ij} $, taking value on $ \{0, 1\} $, which represent an edge being absent or present respectively. We impose the constraint that there is only one path in and out of a city by $ \sum_{i} x_{ij} = 1 \: \forall j $ and  $ \sum_{j} x_{ij} = 1 \: \forall i $. We then input this formulation into the Matlab \verb|intlinprog| solver where we request integer solutions.
+We can represent the edges that connect any two cities $ i $ and $ j $ by a $ n \times n $ matrix $ x_{ij} $, taking values in $ \{0, 1\} $, which represent an edge being absent or present respectively. We impose the constraint that there is only one path in and out of a city by $ \sum_{i} x_{ij} = 1 \: \forall j $ and  $ \sum_{j} x_{ij} = 1 \: \forall i $. We then input this formulation into the Matlab \verb|intlinprog| solver where we request integer solutions.
 
 The output produced does possibly contain loops, so to prevent this after the first iteration we form a constraint constructed as follows. Suppose $ m $ sub-loops are formed, where for the $ p_1 $-th sub-loop has indices in the set $ \mathbb{S}_{p_1} $. We know that a way to avoid this sub-loop is to force a revised solution to contain at least one edge from any index in $ \mathbb{S}_{p_1} $ to any index in $ \mathbb{S}_{p_1}^c $. Hence the $ p_1 $-th loop gives us one inequality constraint. As this holds for each of the ${p_1} $ sub-loops we have ${p_1} $ constraints after this iteration.
 
