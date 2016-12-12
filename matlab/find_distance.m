@@ -1,7 +1,14 @@
 function [ d ] = find_distance( p, M )
 % Author: Ana Osojnik
-%UNTITLED2 Summary of this function goes here
-%   Detailed explanation goes here
+% Date: December 2016
+% Description:
+%   Finds the length of the path given a sequence of cities p
+
+% Input:
+%     p: Array, row vector of permutation of the order of cities to visit.
+%     M: Matrix, distance matrix between cities.
+% Output:
+%     d: Float, total distance travelled in a round trip.
 
 n = size(M,2);
 idx = [p;p([2:end,1])];

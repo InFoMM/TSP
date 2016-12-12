@@ -1,25 +1,37 @@
 function [ p, d, t ] = two_opt_search( M )
 % Author: Ana Osojnik
-%tabu_search Summary of this function goes here
-%   Detailed explanation goes here
+% Date: December 2016
+% Description:
+%   Performs a 2-opt search by considenring two-switches of edges. See Tabu
+%   search for more comments, disregarding the use of memory lists.
+
+% Input:
+%     M: Matrix, distance matrix between cities.
+% Output:
+%     p: Array, row vector of permutation of the order of cities to visit.
+%     d: Float, total distance travelled in a round trip.
+%     t: Float, execution time for algorithm.
 
 tic;
 n = size(M,1);
-for j = 1:1
-    start = randi([1,10]);
-    greedy
-end
+
+% Initial best guess obtained with greedy algorithm
+start = randi([1,10]);
+aux_tabu_greedy
 d_new = sum(sum(M));
 
+% Find all possible combinations of edges that are allowed to be permuted
 possible_moves = nchoosek(1:n,2);
 possible_moves = possible_moves( (possible_moves(:,1)==1) + ...
     (possible_moves(:,2)==10) ~= 2, : );
 possible_moves = possible_moves( diff(possible_moves') > 1, : );
 
+% Set counts to 0
 iter = 0;
 count = 0;
 overall_count = 0;
 
+% Set maximum counts
 max_count = size(possible_moves,1);
 batch_size = floor(max_count/5);
 max_overall_count = 300*max_count;
@@ -28,7 +40,7 @@ while overall_count <= max_overall_count
     iter = iter+1;
     fprintf('Iteration %d:\n',iter)
     
-    % Check possible moves    
+    % Permute moves to randomize search  
     permute_moves = randperm( max_count );
     while (d_new >= d) && (count < max_count)
         size_candidates = min(batch_size,max_count-count);
@@ -51,6 +63,7 @@ while overall_count <= max_overall_count
         break
     else
         fprintf('***Improvement found***\n')
+        
         % Perform swap of edges
         d = d_new; d_new = d + 1;
         a = candidate_moves(new_id,1); b = candidate_moves(new_id,2);

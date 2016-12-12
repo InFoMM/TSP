@@ -1,6 +1,22 @@
 function [ idx, cycles, no_cycles, cycle_lengths ] = find_cycles( sol, cities )
 % Author: Ana Osojnik
-%find_cycles function finds cycles given the output from intlinprog
+% Date: December 2016
+% Description:
+%   Finds cycles and paths given a sequence of edges sol.
+
+% Input:
+%     sol: Array, row vector of permutation of the order of cities to visit
+%          or an n x n matrix of edges.
+%     cities: String array, names of cities.
+% Output:
+%     idx: Matrix, 2 x n matrix containing i and j indices of all edges in
+%          the path, ordered
+%     cycles: Array, row vector of cycles and paths, ordered to start at city 1
+%             and the rest as in sol
+%     no_cycles: Float, number of cycles found
+%     cycle_lengths: 
+%     d: Float, total distance travelled in a round trip.
+%     t: Float, execution time for algorithm.
 
 if nargin < 2
     cities = string({'Alicante','Barcelona','Granada','Madrid','Malaga',...
